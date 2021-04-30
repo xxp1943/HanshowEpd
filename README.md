@@ -11,10 +11,10 @@ It contains:
 * 25VQ21 256KB SPI Flash
 * A7106 RF chip
 
-![PriceTag Image]https://github.com/xxp1943/HanshowEpd/blob/SwUartTest/Images/HSPriceTag.png
+![PriceTag](https://github.com/xxp1943/HanshowEpd/blob/SwUartTest/Images/HSPriceTag.png)
 
 ## Hardware
-![Connection Image]https://github.com/xxp1943/HanshowEpd/blob/SwUartTest/Images/HardwareConnection.png
+![Connection](https://github.com/xxp1943/HanshowEpd/blob/SwUartTest/Images/HardwareConnection.png)
 
 ## SwUartTest Branch
 This branch is used for software UART module test.
