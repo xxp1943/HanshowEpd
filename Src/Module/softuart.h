@@ -1,7 +1,7 @@
 /*
  * softuart.h
  *
- *  Created on: 2021Äê4ÔÂ21ÈÕ
+ *  Created on: 2021ï¿½ï¿½4ï¿½ï¿½21ï¿½ï¿½
  *      Author: LaoGao
  */
 
@@ -10,12 +10,13 @@
 #include "stdint.h"
 
 
-#define SWUART_TXD        BIT0
-#define SWUART_RXD        BIT2       //P2.2
+//#define SWUART_TXD        BIT0
+//#define SWUART_RXD        BIT2       //P2.2
 
 #define SWUART_BAUD_RATE        (9600UL)
 #define SWUART_SMCLK_FREQ       (16000000UL)
 
+#define SYSTICK_FREQ            (1000UL)
 
 //typedef uint8_t (*t_RxCallBack)(void *pdat, uint8_t rxdata);// return 0 -- continue to receive; 1 -- disable to receive
 // sta: 0: Tx complete; 1: Rx Ready;

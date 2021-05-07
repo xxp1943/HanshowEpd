@@ -1,14 +1,17 @@
 /*
  * softuart.c
  *
- *  Created on: 2021Äê4ÔÂ21ÈÕ
+ *  Created on: 2021ï¿½ï¿½4ï¿½ï¿½21ï¿½ï¿½
  *      Author: LaoGao
  */
 #include "msp430.h"
 #include "softuart.h"
+#include "common.h"
 
 #define SWUART_TBIT             (SWUART_SMCLK_FREQ / SWUART_BAUD_RATE)
 #define SWUART_TBIT_DIV2        (SWUART_SMCLK_FREQ / SWUART_BAUD_RATE / 2)
+
+#define SYSTICK_T               (SWUART_SMCLK_FREQ / SYSTICK_FREQ)
 
 typedef struct
 {
@@ -47,6 +50,12 @@ void SWUART_Init(void)
     //Init TA1
     TA1CCTL0 = OUT;                          // Set TXD Idle as Mark = '1'
     TA1CCTL1 = SCS + CM1 + CAP + CCIE + CCIS0;       // Sync, Neg Edge, Capture, Int, CCI1B
+
+    /**** SysTick ****/
+    TA1CCR2 = SYSTICK_T;
+    TA1CCTL2 = CCIE;
+
+
     TA1CTL = TASSEL_2 + MC_2;                // SMCLK, start in continuous mode
 
 }
@@ -167,6 +176,11 @@ void __attribute__ ((interrupt(TIMER1_A1_VECTOR))) Timer_A1_ISR (void)
                     }
                 }
             }
+            break;
+        /**** SysTIck ****/
+        case TA1IV_TACCR2:
+            TA1CCR2 += SYSTICK_T;
+            g_SYSTICK++;
             break;
     }
 }
