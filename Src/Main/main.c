@@ -145,9 +145,10 @@ void InitGpio(void)
     P1SEL = 0x00;               // 
     P1DIR = 0xFF;               // Set all pins to output
 
-    P2OUT = RF_POW;   // RF_POW off
+    P2OUT = RF_POW | SWUART_RXD;   // RF_POW off, SWUART pull up resistor
     P2SEL = SWUART_TXD | SWUART_RXD | BIT6 | BIT7;    //Timer function for TXD/RXD pins
     P2DIR = 0xFF & ~SWUART_RXD & ~EPD_BUSY & ~BIT6;
+    P2REN = SWUART_RXD;
 
     P3OUT = EPD_POW | FLASH_CS;               // EPD_POW off
     P3SEL = 0x00;               // 
