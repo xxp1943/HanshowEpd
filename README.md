@@ -11,10 +11,17 @@ It contains:
 * 25VQ21 256KB SPI Flash
 * A7106 RF chip
 
-![PriceTag](https://github.com/xxp1943/HanshowEpd/blob/SwUartTest/Images/HSPriceTag.png)
+![PriceTag](https://github.com/xxp1943/HanshowEpd/blob/EpdClock/Images/HSPriceTag.png)
 
 ## Hardware
-![Connection](https://github.com/xxp1943/HanshowEpd/blob/SwUartTest/Images/HardwareConnection.png)
+![Connection](https://github.com/xxp1943/HanshowEpd/blob/EpdClock/Images/HardwareConnection.png)
 
-## SwUartTest Branch
-This branch is used for software UART module test.
+## EpdClock Branch
+This branch is used for EPD Clock.
+
+### Modify Hardware
+Modify the hardware to add 32768Hz crystal for RTC function.
+1. Cut off the connection of P2.6 and P2.7.
+2. Connect crystal to P2.6 and P2.7.
+3. Connect the EPD_POW and RF_POW to P3.2 and P2.1
+![Connection](https://github.com/xxp1943/HanshowEpd/blob/EpdClock/Images/Modify.png)
