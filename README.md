@@ -1,5 +1,5 @@
 # HanshowEpd
-Modify and program the Hanshow 2.13 inch price tag as a EPD clock. 
+Modify and program the Hanshow 2.13 inch price tag as an EPD clock. 
 
 ## Overview
 The Hanshow 2.13 inch price tag is very interesting device. It is a small MCU system with EPD to display the price. 
@@ -16,8 +16,15 @@ It contains:
 ## Hardware
 ![Connection](https://github.com/xxp1943/HanshowEpd/blob/EpdClock/Images/HardwareConnection.png)
 
-## EpdClock Branch
+## EpdClock Branch (Developing)
 This branch is used for EPD Clock.
+![Connection](https://github.com/xxp1943/HanshowEpd/blob/EpdClock/Images/Layout.png)
+
+Todo List:
+- [x] Display time and date on EPD.
+- [x] Software UART.
+- [ ] Configure time and date via UART.
+- [ ] COnfigure time and date via RF.
 
 ### Modify Hardware
 Modify the hardware to add 32768Hz crystal for RTC function.

@@ -6,6 +6,7 @@
 #include "common.h"
 #include "font.h"
 #include "RTC_Calendar.h"
+#include "flash.h"
 
 #define LPM3P_RTC (1)
 #define LPM3P_DISP (2)
@@ -67,12 +68,17 @@ int main(void)
 	WDTCTL = WDTPW | WDTHOLD;	// stop watchdog timer
 	InitClk();
 	InitGpio();
+    
 	__enable_interrupt();
 
 	SWUART_Init();
 	SWUART_SetCallBack(uart_callback, 0);
 	
 	SWUART_Send("Hello World!", sizeof("Hello World!")-1);
+    
+    //Flash Init
+    FLASH_Init();
+
 
     // Init EDP power and SPI
     EPD_POW_ON();
@@ -142,8 +148,10 @@ void InitClk(void)
 void InitGpio(void)
 {
     P1OUT = 0x00;               //
-    P1SEL = 0x00;               // 
+    P1SEL = FLASH_CK | FLASH_SI | FLASH_SO;               // 
+    P1SEL2 = FLASH_CK | FLASH_SI | FLASH_SO;
     P1DIR = 0xFF;               // Set all pins to output
+    
 
     P2OUT = RF_POW | SWUART_RXD;   // RF_POW off, SWUART pull up resistor
     P2SEL = SWUART_TXD | SWUART_RXD | BIT6 | BIT7;    //Timer function for TXD/RXD pins

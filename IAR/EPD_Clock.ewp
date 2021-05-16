@@ -655,7 +655,7 @@
         </option>
         <option>
           <name>SecondaryOutputFile</name>
-          <state></state>
+          <state>(None for the selected format)</state>
         </option>
         <option>
           <name>XDefines</name>
@@ -695,7 +695,7 @@
         </option>
         <option>
           <name>XIncludes</name>
-          <state>###Uninitialized###</state>
+          <state>$TOOLKIT_DIR$\LIB\</state>
         </option>
         <option>
           <name>ModuleStatus</name>
@@ -707,7 +707,7 @@
         </option>
         <option>
           <name>XclFile</name>
-          <state>lnk0t.xcl</state>
+          <state>$TOOLKIT_DIR$\CONFIG\lnk430G2553.xcl</state>
         </option>
         <option>
           <name>XclFileSlave</name>
@@ -795,7 +795,7 @@
         </option>
         <option>
           <name>xcProgramEntryLabel</name>
-          <state></state>
+          <state>__program_start</state>
         </option>
         <option>
           <name>DebugInformation</name>
@@ -835,7 +835,7 @@
         </option>
         <option>
           <name>ExtraOutputFile</name>
-          <state></state>
+          <state>EPD_Clock.a43</state>
         </option>
         <option>
           <name>ExtraOutputFormat</name>
@@ -1893,6 +1893,12 @@
       <name>$PROJ_DIR$\..\Src\Module\epd.h</name>
     </file>
     <file>
+      <name>$PROJ_DIR$\..\Src\Module\flash.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\Src\Module\flash.h</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\Src\Module\font.c</name>
     </file>
     <file>
@@ -1915,6 +1921,12 @@
     </file>
     <file>
       <name>$PROJ_DIR$\..\Src\Module\softuart.h</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\Src\Module\ucbspi.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\Src\Module\ucbspi.h</name>
     </file>
   </group>
 </project>
