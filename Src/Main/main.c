@@ -7,9 +7,8 @@
 #include "font.h"
 #include "RTC_Calendar.h"
 #include "flash.h"
+#include "shell.h"
 
-#define LPM3P_RTC (1)
-#define LPM3P_DISP (2)
 
 typedef struct 
 {
@@ -71,10 +70,12 @@ int main(void)
     
 	__enable_interrupt();
 
-	SWUART_Init();
-	SWUART_SetCallBack(uart_callback, 0);
+	//SWUART_Init();
+	//SWUART_SetCallBack(uart_callback, 0);
 	
-	SWUART_Send("Hello World!", sizeof("Hello World!")-1);
+	//SWUART_Send("Hello World!", sizeof("Hello World!")-1);
+
+    shell_init();
     
     //Flash Init
     FLASH_Init();
@@ -122,14 +123,17 @@ int main(void)
             }
         }
 
-	    if (rxidx >= 10)
-	    {
-	        rxidx = 0;
-	        SWUART_Send(rxbuf, 10);
-	    }
+	    //if (rxidx >= 10)
+	    //{
+	    //    rxidx = 0;
+	   //     SWUART_Send(rxbuf, 10);
+	   // }
+        shell_process();
 
         EPD_InitUpdate(&m_EPD_InitUpdate);
         clock_disp_update(&m_ClockDispUpdate);
+
+        
 
         LPM3_Process();
 	}
@@ -157,6 +161,8 @@ void InitGpio(void)
     P2SEL = SWUART_TXD | SWUART_RXD | BIT6 | BIT7;    //Timer function for TXD/RXD pins
     P2DIR = 0xFF & ~SWUART_RXD & ~EPD_BUSY & ~BIT6;
     P2REN = SWUART_RXD;
+
+    P2IES |= SWUART_RXD;
 
     P3OUT = EPD_POW | FLASH_CS;               // EPD_POW off
     P3SEL = 0x00;               // 
@@ -215,6 +221,10 @@ void clock_disp(uint8_t mode)
 
 void clock_disp_start(t_clock_disp_update *d, uint8_t mode)
 {
+    if (d->sta != 0xFF)
+    {
+        return;
+    }
     d->sta = 0;
     d->mode = mode;
     LPM3Prohibit |= LPM3P_DISP;
@@ -262,13 +272,35 @@ void clock_disp_update(t_clock_disp_update *d)
     }
 }
 
+/*void update_time_full(void)
+{
+    clock_disp_start(&m_ClockDispUpdate, EPD_FULL);
+}*/
+
 void LPM3_Process(void)
 {
     if(LPM3Prohibit)
         return;
     //Enable uart rx pin interrupt
+    P2SEL &= ~SWUART_RXD;
+    P2IFG &= ~SWUART_RXD;
+    P2IE |= SWUART_RXD;
 
     LPM3;
 
     //uart rx disable pin interrut, enablr timer interrupt
+    
+}
+
+#pragma vector = PORT2_VECTOR
+__interrupt void port2_isr(void)
+{
+    if (P2IFG & SWUART_RXD)
+    {
+        P2IE &= ~SWUART_RXD;
+        P2SEL |= SWUART_RXD;
+        //keep the flag. handle it in shell module
+
+        LPM3_EXIT;
+    }
 }

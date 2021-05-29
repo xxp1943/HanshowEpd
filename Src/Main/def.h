@@ -1,5 +1,12 @@
 #ifndef __DEF_H__
 #define __DEF_H__
+#include "stdint.h"
+#define LPM3P_RTC (1)
+#define LPM3P_DISP (2)
+#define LPM3P_SHELL (4)
+#define LPM3P_UART  (8)
+
+extern uint8_t LPM3Prohibit;
 
 // P1
 #define RF_RFIO02       BIT0

@@ -16,14 +16,14 @@ It contains:
 ## Hardware
 ![Connection](https://github.com/xxp1943/HanshowEpd/blob/EpdClock/Images/HardwareConnection.png)
 
-## EpdClock Branch (Developing)
+## EpdClock Branch
 This branch is used for EPD Clock.
 ![Connection](https://github.com/xxp1943/HanshowEpd/blob/EpdClock/Images/Layout.png)
 
 Todo List:
 - [x] Display time and date on EPD.
 - [x] Software UART.
-- [ ] Configure time and date via UART.
+- [x] Configure time and date via UART.
 - [ ] COnfigure time and date via RF.
 
 ### Modify Hardware

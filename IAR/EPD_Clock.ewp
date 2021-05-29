@@ -1911,6 +1911,9 @@
       <name>$PROJ_DIR$\..\Src\IAR_S\RTC_Calendar.s43</name>
     </file>
     <file>
+      <name>$PROJ_DIR$\..\Src\Module\shell.c</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\Src\Module\softspi3w.c</name>
     </file>
     <file>
