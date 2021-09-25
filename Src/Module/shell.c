@@ -299,17 +299,18 @@ void SetTime(void)
     if (buf[3] >= 12)
     {
         ampm = 1;
-        hour12 = buf[3]%12;
     }
     else
     {
         ampm = 0;
     }
+    hour12 = buf[3]%12;
     if (hour12 == 0)
     {
         hour12 = 12;
     }
-    hour12 = (hour12 & 0xf0) * 10 + (hour12 & 0xf);
+    //hour12 = (hour12 & 0xf0) * 10 + (hour12 & 0xf);
+    hour12 = ((hour12 / 10) << 4) | (hour12 % 10);
     setTime(hour12, buf[4], buf[5], ampm);
     
     strcpy((char*)m_SHELL_TXBUF, "OK");
