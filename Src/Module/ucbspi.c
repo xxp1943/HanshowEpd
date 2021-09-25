@@ -23,7 +23,7 @@ uint8_t UCBSPI_Transfer(const uint8_t *txbuf, uint8_t *rxbuf, uint16_t size)
     {
         if(txbuf)
         {
-            UCB0TXBUF = *txbuf;
+            UCB0TXBUF = *(txbuf++); 
         }
         else
         {
@@ -32,7 +32,7 @@ uint8_t UCBSPI_Transfer(const uint8_t *txbuf, uint8_t *rxbuf, uint16_t size)
         while(!(IFG2 & UCB0RXIFG));
         if (rxbuf)
         {
-            *rxbuf = UCB0RXBUF;
+            *(rxbuf++) = UCB0RXBUF;
         }
         IFG2 &= ~UCB0RXIFG;
     }
